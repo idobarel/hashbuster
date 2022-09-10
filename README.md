@@ -27,7 +27,7 @@ threads -> not required | -t OR --threads flag | defualt = 10.<br>
 ### Command syntax:
 hashbuster -w [ PATH TO WORDLIST ] -t [ THREADS ] [ HASH ]
 ### Example:
-hashbuster -w /usr/share/wordlists/rockyou.txt -t 1000 5f4dcc3b5aa765d61d8327deb882cf99
+hashbuster -w /usr/share/wordlists/rockyou.txt -t 1000 5f4dcc3b5aa765d61d8327deb882cf99<br>
 cracking _5f4dcc3b5aa765d61d8327deb882cf99_ with _/usr/share/wordlists/rockyou.txt_ and _1000_ threads
 
 The program will find the hash is for the word _password_

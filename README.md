@@ -26,12 +26,12 @@ WORDLIST -> required | -w OR --wordlist flag.<br>
 threads -> not required | -t OR --threads flag | defualt = 10.<br>
 mode -> not required | -m OR --mode flag | defualt = md5.<br>
 ### Command syntax:
-hashbuster -w [ PATH TO WORDLIST ] -t [ THREADS ] -m [ MODE ][ HASH ]
+hashbuster -w [ PATH TO WORDLIST ] -t [ THREADS ] -m [ MODE ] [ HASH ]
 ### Example:
 hashbuster -w /usr/share/wordlists/rockyou.txt -t 1000 5f4dcc3b5aa765d61d8327deb882cf99<br>
-cracking _5f4dcc3b5aa765d61d8327deb882cf99_ with _/usr/share/wordlists/rockyou.txt_ and _1000_ threads
-
+cracking _5f4dcc3b5aa765d61d8327deb882cf99_ with _/usr/share/wordlists/rockyou.txt_, _1000_ threads and the defualt _md5_ hashtype.<br>
 The program will find the hash is for the word _password_
+
 ### Hash Modes:
 Since the program is written in python3, it's using the _hashlib_ module to create the hash objects.<br>
 therefore the available hash types are:<br>

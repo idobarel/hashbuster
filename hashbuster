@@ -2,7 +2,7 @@
 import threading
 import argparse
 from termcolor import colored
-from hashlib import md5
+import hashlib
 import sys
 import os
 
@@ -10,7 +10,7 @@ colls = os.get_terminal_size().columns
 
 
 class Cracker():
-    def __init__(self, hash:str, wordlistPath:str, threads:int) -> None:
+    def __init__(self, hash:str, wordlistPath:str, threads:int, mode:str) -> None:
         self.hash = hash
         self.wordlist = self._readFileLines(wordlistPath)
         self.l = len(self.wordlist)
@@ -19,6 +19,7 @@ class Cracker():
         self.count = 0
         self.t:list[threading.Thread] = []
         self.cracked = ""
+        self.mode = mode
     
     def _readFileLines(self, path:str):
         with open(path, "rb") as f:
@@ -28,7 +29,7 @@ class Cracker():
     
     def _compare(self, w:bytes):
         self.count += 1
-        if md5(w).hexdigest() == self.hash:
+        if hashlib.new(self.mode, w).hexdigest() == self.hash:
             self.found = True
             self.cracked = w
             return True
@@ -75,23 +76,28 @@ class Cracker():
                 
 
 def getArgs():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("hash", type=str, help="MD5 hash to crack.")
+    parser = argparse.ArgumentParser(description="available types:\n"+str(hashlib.algorithms_available))
+    parser.add_argument("hash", type=str, help="Hash to crack.")
     parser.add_argument("-w", "--wordlist", required=True, type=str, help="Specify the wordlist.")
     parser.add_argument("-t", "--threads", type=int, default=10, dest="threads", help="use threads")
+    parser.add_argument("-m", "--mode", type=str, default="md5", dest="mode", help="Specify the hash type | md5")
     return parser.parse_args()
 
 def main():
     try:
         args = getArgs()
-        print("-"*(int(colls/2)-8)+"MD5 Hash Cracker"+"-"*(int(colls/2)-7))
+        if not args.mode in hashlib.algorithms_available:
+            print(f"The hash type {args.mode} is not available")
+            exit(0)
+        print("-"*(int(colls/2)-6)+"Hash Cracker"+"-"*(int(colls/2)-6))
         print()
         print("Hash >> "+colored(args.hash, "cyan"))
         print("Wordlist >> "+colored(args.wordlist, "cyan"))
         print("Running Jobs >> "+colored(args.threads, "cyan"))
+        print("Hash type >> "+colored(args.mode, "cyan"))
         print()
         print("-"*(int(colls/2)-3)+"Running"+"-"*(int(colls/2)-3))
-        c = Cracker(args.hash, args.wordlist, args.threads)
+        c = Cracker(args.hash, args.wordlist, args.threads, args.mode)
         c.start()
     except KeyboardInterrupt:
         print(colored("\nStopping threads...", "red"))

@@ -1,6 +1,6 @@
 # HASHBUSTER
 ## The multi threaded hash cracker
-written in python3, the hash buster script allows you to crack md5* hashes
+written in python3, the hash buster script allows you to crack hashes based on a worldist
 
 # Usage
 ## Installation:
@@ -24,13 +24,18 @@ The program takes 3 arguments, 2 required and 1 optinal:<br>
 HASH -> required | possitinal arg, no flag.<br>
 WORDLIST -> required | -w OR --wordlist flag.<br>
 threads -> not required | -t OR --threads flag | defualt = 10.<br>
+mode -> not required | -m OR --mode flag | defualt = md5.<br>
 ### Command syntax:
-hashbuster -w [ PATH TO WORDLIST ] -t [ THREADS ] [ HASH ]
+hashbuster -w [ PATH TO WORDLIST ] -t [ THREADS ] -m [ MODE ][ HASH ]
 ### Example:
 hashbuster -w /usr/share/wordlists/rockyou.txt -t 1000 5f4dcc3b5aa765d61d8327deb882cf99<br>
 cracking _5f4dcc3b5aa765d61d8327deb882cf99_ with _/usr/share/wordlists/rockyou.txt_ and _1000_ threads
 
 The program will find the hash is for the word _password_
+### Hash Modes:
+Since the program is written in python3, it's using the _hashlib_ module to create the hash objects.<br>
+therefore the available hash types are:<br>
+blake2b, shake_128, sha3_512, sha3_224, md5-sha1, sha512, sha3_256, md5, sha512_256, sha224, shake_256, sha384, ripemd160, whirlpool, md4, sha512_224, sm3, sha1, sha256, blake2s, sha3_384.
 
 # Notice
 I do not promote any illigal actions, please do not use this script for malicuse activities!

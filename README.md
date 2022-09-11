@@ -20,7 +20,7 @@ chmod +x hashbuster # give execute permissions
 ## Syntax
 the _-h_ argument should give you all the options in the app. but I would like to put it here as well:
 ### Args:
-The program takes 3 arguments, 2 required and 1 optinal:<br>
+The program takes 4 arguments, 2 required and 2 optinal:<br>
 HASH -> required | possitinal arg, no flag.<br>
 WORDLIST -> required | -w OR --wordlist flag.<br>
 threads -> not required | -t OR --threads flag | defualt = 10.<br>
